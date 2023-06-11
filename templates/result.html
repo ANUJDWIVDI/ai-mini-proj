@@ -180,35 +180,30 @@ body {
 			</ul>
 		</div>
 
-		<!-- Display the plots using Bootstrap carousel -->
-		<div class="container my-5">
-			<h2>Cluster Plots:</h2>
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					{% for i in range(image_names|count) %}
-					<li data-target="#myCarousel" data-slide-to="{{ i }}" {% if i == 0 %}class="active"{% endif %}></li>
-					{% endfor %}
-				</ol>
-				<div class="carousel-inner">
-					{% for name in image_names %}
-					<div class="carousel-item {% if loop.first %}active{% endif %}">
-						<img src="{{ url_for('static', filename='plots/'+name) }}" alt="Cluster Plot">
-					</div>
-					{% endfor %}
-				</div>
-				<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
+	<!-- Display a single image -->
+<div class="container my-5">
+    <h2>Regression Plot:</h2>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='plots/'+image_names[0]) }}" alt="Regression Plot">
+            </div>
+        </div>
+    </div>
+</div>
 
-				<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
 
-		<!-- Add the Download button -->
+<!-- Display the plot summaries -->
+<div class="container my-5">
+  <h2>Plot Summaries:</h2>
+  {% for summary in plot_summary %}
+  <div class="container my-3">
+    {{ summary|safe }}
+  </div>
+  {% endfor %}
+</div>
+
+        		<!-- Add the Download button -->
 		<div class="text-center mt-3">
 			<a class="btn btn-primary" href="/download-pdf" target="_blank" style="color: #ffffff; font-weight: bold;">Download PDF</a>
 		</div>

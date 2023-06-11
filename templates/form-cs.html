@@ -150,7 +150,7 @@
                 <a href="{{ url_for('readme') }}" class="btn btn-primary">Readme.md</a>
             </div>
         </div>
-        <form method="POST" action="{{ url_for('generate_clusters') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url_for('generate_linear_plots') }}" enctype="multipart/form-data">
         <!-- Dataset selection section -->
         <div class="row mb-5">
             <div class="col-md-4 dataset-table">
@@ -176,44 +176,61 @@
                         </tr>
                         <tr>
                             <td><input type="radio" name="dataset" value="dataset1" id="dataset1"></td>
-                            <td><div class="text-box">Sales Transaction:</div> Contains information about sales transactions such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
+                            <td><div class="text-box">data.csv</div> Contains information about sales transactions such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
                         </tr>
                         <tr>
                             <td><input type="radio" name="dataset" value="dataset2" id="dataset2"></td>
-                            <td><div class="text-box">PersonalInfo:</div> Contains personal information such as first name, last name, title, gender, email, address, job details, and IP address.</td>
+                            <td><div class="text-box">fundamentals.csv</div> Contains personal information such as first name, last name, title, gender, email, address, job details, and IP address.</td>
                         </tr>
                         <tr>
                             <td><input type="radio" name="dataset" value="dataset3" id="dataset3"></td>
-                            <td><div class="text-box">CustomerDemographics:</div> Contains demographic information about customers such as age, education, income, occupation, and settlement size.</td>
+                            <td><div class="text-box">kc_house_data.csv</div> Contains demographic information about customers such as age, education, income, occupation, and settlement size.</td>
                         </tr>
                         <tr>
                             <td><input type="radio" name="dataset" value="dataset4" id="dataset4"></td>
-                            <td><div class="text-box">WineQuality:</div> Contains chemical composition and sensory data for wines, with a customer segmentation variable.</td>
-                        </tr>
-                        <tr style="display: none;">
-                            <td><input type="radio" name="dataset" value="dataset5" id="dataset5" style="display:none"></td>
-                            <td><div class="text-box">OnlineRetail:</div> Contains information about online retail transactions such as invoice number, product code, description, quantity, price, and country.</td>
+                            <td><div class="text-box">Nutrition__Physical_Activity__and_Obesity_-_Behavioral_Risk_Factor_Surveillance_System.csv</div> Contains chemical composition and sensory data for wines, with a customer segmentation variable.</td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="dataset" value="dataset6" id="dataset6"></td>
-                            <td><div class="text-box">GeoLocation:</div> Contains information about geographic locations such as latitude, longitude, country, and time zone.</td>
+                            <td><input type="radio" name="dataset" value="dataset5" id="dataset5"></td>
+                            <td><div class="text-box">placement.csv</div> Contains chemical composition and sensory data for wines, with a customer segmentation variable.</td>
                         </tr>
-                        <tr style="display: none;">
-                            <td><input type="radio" name="dataset" value="dataset7" id="dataset7" style="display:none"></td>
-                            <td><div class="text-box">ProductSales:</div> Contains information about product sales such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset6" id="dataset6" style="display:none"></td>
+                            <td><div class="text-box">population.csv</div> Contains information about online retail transactions such as invoice number, product code, description, quantity, price, and country.</td>
                         </tr>
-                        <tr style="display: none;">
-                            <td><input type="radio" name="dataset" value="dataset8" id="dataset8" style="display:none"></td>
-                            <td><div class="text-box">SportsPerformance:</div> Contains information about sports performance such as name, age, gender, device used, network type, and sports played.</td>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset7" id="dataset7"></td>
+                            <td><div class="text-box">prices.csv</div> Contains information about geographic locations such as latitude, longitude, country, and time zone.</td>
                         </tr>
-                        <tr style="display: none;">
-                            <td><input type="radio" name="dataset" value="dataset9" id="dataset9" style="display:none"></td>
-                            <td><div class="text-box">CustomerSegmentation:</div> Contains demographic and behavioral data about customers, used for segmentation and targeting.</td>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset8" id="dataset8"></td>
+                            <td><div class="text-box">prices-split-adjusted.csv</div> Contains information about product sales such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
                         </tr>
-                        <tr style="display: none;">
-                            <td><input type="radio" name="dataset" value="dataset10" id="dataset10" style="display:none"></td>
-                            <td><div class="text-box">MarketBasketAnalysis:</div> Contains information about items purchased together in a transaction, used for market basket analysis.</td>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset9" id="dataset9"></td>
+                            <td><div class="text-box">Real estate.csv</div> Contains information about sports performance such as name, age, gender, device used, network type, and sports played.</td>
                         </tr>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset10" id="dataset10"></td>
+                            <td><div class="text-box">Salary_dataset.csv</div> Contains demographic and behavioral data about customers, used for segmentation and targeting.</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset11" id="dataset11"></td>
+                            <td><div class="text-box">Salary_Data.csv</div> Contains information about items purchased together in a transaction, used for market basket analysis.</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset12" id="dataset12"></td>
+                            <td><div class="text-box">securities.csv</div> Contains information about product sales such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset13" id="dataset13"></td>
+                            <td><div class="text-box">who_dataset.csv</div> Contains information about sports performance such as name, age, gender, device used, network type, and sports played.</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="dataset" value="dataset14" id="dataset14"></td>
+                            <td><div class="text-box">winequality-red.csv</div> Contains demographic and behavioral data about customers, used for segmentation and targeting.</td>
+                        </tr>
+
 
                     </tbody>
                 </table>
@@ -224,16 +241,7 @@
                     <div class="box"><label for="algoSelect">Select Algorithm:</label></div>
 
                     <select class="form-control" id="algoSelect" name="algo_type">
-                        <option value="k-means">K-Means Clustering</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="box"><label for="clusterSelect">Select Number of Clusters:</label></div>
-
-                    <select class="form-control" id="clusterSelect" name="num_clusters">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <option value="linear_regression">linear-regression</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Generate</button>

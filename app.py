@@ -1,16 +1,10 @@
+import os
 import shutil
+summary_for_pdf = []
 
-from flask import Flask, render_template, request
-import pandas as pd
-import numpy as np
-from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-import os
-import os
-from flask import send_file, render_template
-from reportlab.lib.pagesizes import portrait, A4
-from reportlab.pdfgen import canvas
-import os
+import pandas as pd
+from flask import Flask, render_template, request
 from flask import send_file
 from reportlab.lib.pagesizes import portrait, A4
 from reportlab.lib.units import inch
@@ -50,10 +44,6 @@ def index():
     return render_template('form-cs.html')
 
 
-# Route for collecting form data via wifi tunneling
-@app.route('/wifi-tunneling', methods=['GET', 'POST'])
-def wifi_tunneling():
-    return render_template('wifi_tunneling.html')
 
 @app.route('/readme', methods=['GET', 'POST'])
 def readme():
@@ -67,19 +57,67 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# Route for generating and displaying clustering results
-@app.route('/generate-clusters', methods=['GET', 'POST'])
-def generate_clusters():
+# Route for generating and displaying results
+
+
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import IsolationForest
+
+def get_plot_filenames():
+    plot_dir = 'static/plots'
+    plot_filenames = [filename for filename in os.listdir(plot_dir) if filename.endswith('.png')]
+    return plot_filenames
+
+# Helper function to get summary of the plot and outlier data
+def get_plot_summary(dataset, feature_names, outliers):
+    summary = []
+    for i in range(len(feature_names)):
+        for j in range(i + 1, len(feature_names)):
+            feature1 = feature_names[i]
+            feature2 = feature_names[j]
+            plot_summary = f"Plot: {feature1} vs {feature2}\n"
+            plot_summary += "Description:\n"
+            plot_summary += "- Scatter plot of the data points\n"
+            plot_summary += "- Linear regression line\n"
+            plot_summary += "- Outlier points in red\n"
+            plot_summary += "Outlier Data:\n"
+            outlier_data = dataset[outliers]
+            outlier_data_summary = f"Number of outliers: {len(outlier_data)}\n"
+            outlier_data_summary += f"{outlier_data.describe()}\n"
+            plot_summary += outlier_data_summary
+            summary_for_pdf.append(plot_summary)
+
+    for i in range(len(feature_names)):
+        for j in range(i + 1, len(feature_names)):
+            feature1 = feature_names[i]
+            feature2 = feature_names[j]
+            plot_summary = f"<h3>Plot: {feature1} vs {feature2}</h3>"
+            plot_summary += "<hr>"
+            plot_summary += "<h4>Description:</h4>"
+            plot_summary += "<ul>"
+            plot_summary += "<li>Scatter plot of the data points</li>"
+            plot_summary += "<li>Linear regression line</li>"
+            plot_summary += "<li>Outlier points in red</li>"
+            plot_summary += "</ul>"
+            plot_summary += "<hr>"
+            plot_summary += "<h4>Outlier Data:</h4>"
+            outlier_data = dataset[outliers]
+            plot_summary += f"<p>Number of outliers: {len(outlier_data)}</p>"
+            plot_summary += f"<pre>{outlier_data.describe().to_string()}</pre>"
+            summary.append(plot_summary)
+    return summary
+
+@app.route('/generate-linear-plots', methods=['GET', 'POST'])
+def generate_linear_plots():
     if request.method == 'POST':
         # Get form data
-        num_clusters = int(request.form['num_clusters'])
+        print("Getting Form Data")
         algo_type = request.form['algo_type']
-
-        print("--GOT ALGO--")
         dataset_selection = request.form['dataset']
-        print("--GOT DATASET--")
+        print("Dataset received")
 
         if request.form['dataset'] == 'custom':
+            print("Dataset custom")
             file = request.files['custom_dataset']
             if file and allowed_file(file.filename):
                 # Save the custom dataset file to the "datasets" folder
@@ -87,101 +125,112 @@ def generate_clusters():
                     filename = 'custom.csv'  # Set the desired filename
                     file_path = os.path.join('datasets', filename)
                     file.save(file_path)  # Save the file
-                    # Perform clustering on the custom dataset
+                    # Perform regression on the custom dataset
 
         # Determine dataset selection and load dataset
         if dataset_selection == 'dataset1':
-            dataset = pd.read_csv('datasets/Sales Transaction.csv')
+            dataset = pd.read_csv('datasets/data.csv')
         elif dataset_selection == 'dataset2':
-            dataset = pd.read_csv('datasets/Personal Info.csv')
+            dataset = pd.read_csv('datasets/fundamentals.csv')
         elif dataset_selection == 'dataset3':
-            dataset = pd.read_csv('datasets/Customer Demographics.csv')
+            dataset = pd.read_csv('datasets/kc_house_data.csv')
         elif dataset_selection == 'dataset4':
-            dataset = pd.read_csv('datasets/Wine Quality.csv')
+            dataset = pd.read_csv('datasets/Nutrition__Physical_Activity__and_Obesity_-_Behavioral_Risk_Factor_Surveillance_System.csv')
         elif dataset_selection == 'dataset5':
-            dataset = pd.read_csv('datasets/online retail.csv')
+            dataset = pd.read_csv('datasets/placement.csv')
         elif dataset_selection == 'dataset6':
-            dataset = pd.read_csv('datasets/geolocation.csv')
+            dataset = pd.read_csv('datasets/population.csv')
         elif dataset_selection == 'dataset7':
-            dataset = pd.read_csv('datasets/Product Sales.csv')
+            dataset = pd.read_csv('datasets/prices.csv')
         elif dataset_selection == 'dataset8':
-            dataset = pd.read_csv('datasets/Sports Performance.csv')
+            dataset = pd.read_csv('datasets/prices-split-adjusted.csv')
         elif dataset_selection == 'dataset9':
-            dataset = pd.read_csv('datasets/Customer-Segmentation.csv')
+            dataset = pd.read_csv('datasets/Real estate.csv')
         elif dataset_selection == 'dataset10':
-            dataset = pd.read_csv('datasets/dataset7.csv')
+            dataset = pd.read_csv('datasets/Salary_dataset.csv')
+        elif dataset_selection == 'dataset11':
+            dataset = pd.read_csv('datasets/Salary_Data.csv')
+        elif dataset_selection == 'dataset12':
+            dataset = pd.read_csv('datasets/securities.csv')
+        elif dataset_selection == 'dataset13':
+            dataset = pd.read_csv('datasets/who_dataset.csv')
+        elif dataset_selection == 'dataset14':
+            dataset = pd.read_csv('datasets/winequality-red.csv')
         elif dataset_selection == 'custom':
-            print("CUSTOM - ENTER")
             dataset = pd.read_csv('datasets/custom.csv')
-        else :
-            return render_template('error.html')
-
-        # Identify and remove non-numeric columns
-        non_numeric_columns = []
-        for column in dataset.columns:
-            if not np.issubdtype(dataset[column].dtype, np.number):
-                non_numeric_columns.append(column)
-
-        # Drop rows with NaN values
-        dataset = dataset.dropna()
-        dataset = dataset.drop(columns=non_numeric_columns)
-
-        # Convert remaining columns to floats
-        dataset = dataset.astype(float)
-
-
-        # Get feature names
-        feature_names_a = dataset.columns.tolist()
-        # Convert dataset to HTML table
-        table_html = dataset.to_html(index=False)
-
-
-        # Run clustering algorithm
-        if algo_type == 'k-means':
-            print("KMEANS = ENTER")
-            kmeans = KMeans(n_clusters=num_clusters)
-            kmeans.fit(dataset)
-            dataset['cluster'] = kmeans.labels_
-            # Get feature names
-            feature_names = dataset.columns.tolist()
-            # Remove 'cluster' column from feature names
-            feature_names.remove('cluster')
-            # Generate scatter plot
-            plots = []
-            # Generate scatter plot
-            plots = []
-            plot_dir = os.path.join('static', 'plots')
-            if not os.path.exists(plot_dir):
-                os.makedirs(plot_dir)
-
-            image_names = []
-            for i in range(len(feature_names)):
-                for j in range(i + 1, len(feature_names)):
-                    fig, ax = plt.subplots()
-                    ax.scatter(dataset[feature_names[i]], dataset[feature_names[j]], c=dataset['cluster'])
-                    ax.set_xlabel(feature_names[i])
-                    ax.set_ylabel(feature_names[j])
-                    # Save plot image to file
-                    plot_file = f'plot_{feature_names[i]}_{feature_names[j]}.png'
-                    plot_path = os.path.join(plot_dir, plot_file)
-                    plt.savefig(plot_path, format='png')
-                    plt.close(fig)
-                    image_names.append(plot_file)
-
-            print("EXIT - KMEANS")
-            # Return results HTM
-            return render_template('result.html', image_names=image_names, feature_names=feature_names,feature_names_a=feature_names_a  ,table_html=table_html)
-
-        elif algo_type == 'hierarchical':
-            # Implement hierarchical clustering algorithm
-            # ...
-            return render_template('under_constr.html')
-        elif algo_type == 'DBSCAN':
-            # Implement DBSCAN clustering algorithm
-            # ...
-            return render_template('under_constr.html')
         else:
+            print("ASSIGNING DATASET ERROR")
             return render_template('error.html')
+
+        # Perform linear regression
+        if algo_type == 'linear_regression':
+            X = dataset.iloc[:, 0].values.reshape(-1, 1)  # First column as the independent variable
+            y = dataset.iloc[:, 1].values.astype(float)  # Convert target variable to float
+
+            if len(X) > 0 and len(y) > 0:  # Check if dataset has at least one sample
+                feature_names = dataset.columns.tolist()[:2]  # Select first two columns as default
+
+                if len(dataset.columns) < 2:
+                    error_message = "Dataset does not have enough columns. Select at least 2 columns."
+                    return render_template('error.html', error_message=error_message)
+
+                # Convert dataset to HTML table
+                table_html = dataset.to_html(index=False)
+
+                # Fit linear regression model
+                regressor = LinearRegression()
+                regressor.fit(dataset[feature_names], y)
+
+                # Perform anomaly detection
+                anomaly_detector = IsolationForest(contamination=0.1)  # Adjust contamination level if needed
+                anomaly_detector.fit(dataset[feature_names])
+                outliers = anomaly_detector.predict(dataset[feature_names]) == -1
+
+                # Generate scatter plots for selected features
+                plot_dir = os.path.join('static', 'plots')
+                if not os.path.exists(plot_dir):
+                    os.makedirs(plot_dir)
+
+                for i in range(len(feature_names)):
+                    for j in range(i + 1, len(feature_names)):
+                        fig, ax = plt.subplots()
+                        ax.scatter(dataset[feature_names[i]], dataset[feature_names[j]], c='blue')
+                        ax.scatter(dataset[feature_names[i]][outliers], dataset[feature_names[j]][outliers], c='red')
+                        ax.plot(dataset[feature_names[i]], regressor.predict(dataset[feature_names].values),
+                                color='green')
+                        ax.set_xlabel(feature_names[i])
+                        ax.set_ylabel(feature_names[j])
+                        ax.legend(['Linear Regression', 'Normal', 'Outlier'])
+                        ax.set_title('Linear Regression with Outlier Detection')
+                        # Save plot image to file
+                        plot_file = f'plot_{feature_names[i]}_{feature_names[j]}.png'
+                        plot_path = os.path.join(plot_dir, plot_file)
+                        plt.savefig(plot_path, format='png')
+                        plt.close(fig)
+
+                # Get list of generated plot filenames
+                image_names = get_plot_filenames()
+                image_paths = [os.path.join('static', 'plots', name) for name in image_names]
+
+
+                print(image_paths)
+                print(image_names)
+                # Get plot summary and outlier data
+                plot_summary = get_plot_summary(dataset, feature_names, outliers)
+
+                print(plot_summary)
+
+                # Return results HTML
+                return render_template('result.html',image_names=image_names, image_paths=image_paths, feature_names=feature_names,
+                                       table_html=table_html, plot_summary=plot_summary)
+
+            else:
+                error_message = 'Dataset does not have enough samples.'
+                return render_template('error.html', error_message=error_message)
+        else:
+            error_message = 'Invalid algorithm type.'
+            return render_template('error.html', error_message=error_message)
+
     return render_template('error.html')
 
 
@@ -214,6 +263,8 @@ def download_pdf():
     intro_image_path = 'static/intro.png'
     pdf_canvas.drawImage(intro_image_path, x=0, y=0, width=A4[0], height=A4[1])
 
+
+
     # Iterate through the image files and add them to the PDF
     page_count = 0
     for i, image_file in enumerate(image_files):
@@ -224,7 +275,7 @@ def download_pdf():
 
             # Add header
             header_text = f"Page {page_count}/{total_pages}"
-            pdf_canvas.setFont('Helvetica', 12)
+            pdf_canvas.setFont('Helvetica-Bold', 12)
             pdf_canvas.drawCentredString(A4[0] / 2, top_margin - inch, header_text)
 
         # Calculate the position for the current image
@@ -239,6 +290,20 @@ def download_pdf():
         pdf_canvas.setFont('Helvetica', 10)
         pdf_canvas.drawRightString(x + 6.3 * inch, y - 0.2 * inch, image_file)
 
+    # Add the summary below the image on the second page
+    if len(image_files) == 1:
+        pdf_canvas.showPage()
+        pdf_canvas.setFont('Helvetica-Bold', 12)
+        pdf_canvas.drawString(left_margin, top_margin - inch, 'Report Summary:')
+        y_summary = top_margin - inch - 0.5 * inch
+        pdf_canvas.setFont('Helvetica-Bold', 10)
+        pdf_canvas.setFillColorRGB(0, 0, 0)  # Set font color to black
+        for summary in summary_for_pdf:
+            lines = summary.split('\n')
+            for line in lines:
+                pdf_canvas.drawString(left_margin, y_summary, line)
+                y_summary -= 0.2 * inch
+
     # Add ending page
     ending_image_path = 'static/end.png'
     pdf_canvas.showPage()
@@ -249,6 +314,8 @@ def download_pdf():
 
     # Send the generated PDF file as an attachment
     return send_file(pdf_path, as_attachment=True)
+
+
 
 
 if __name__ == '__main__':
