@@ -185,8 +185,14 @@ def generate_linear_plots():
                 anomaly_detector = IsolationForest(contamination=0.1)  # Adjust contamination level if needed
                 anomaly_detector.fit(dataset[feature_names])
                 outliers = anomaly_detector.predict(dataset[feature_names]) == -1
+                bg_color = request.form.get('bg_color')
+                reg_line_color = request.form.get('reg_line_color')
+                outlier_color = request.form.get('outlier_color')
+
+                # Pass the colors to the plot generation function
 
                 # Generate scatter plots for selected features
+                plot_dir = os.path.join('static', 'plots')
                 plot_dir = os.path.join('static', 'plots')
                 if not os.path.exists(plot_dir):
                     os.makedirs(plot_dir)
@@ -194,10 +200,11 @@ def generate_linear_plots():
                 for i in range(len(feature_names)):
                     for j in range(i + 1, len(feature_names)):
                         fig, ax = plt.subplots()
-                        ax.scatter(dataset[feature_names[i]], dataset[feature_names[j]], c='blue')
-                        ax.scatter(dataset[feature_names[i]][outliers], dataset[feature_names[j]][outliers], c='red')
+                        ax.scatter(dataset[feature_names[i]], dataset[feature_names[j]], c=bg_color)
+                        ax.scatter(dataset[feature_names[i]][outliers], dataset[feature_names[j]][outliers],
+                                   c=outlier_color)
                         ax.plot(dataset[feature_names[i]], regressor.predict(dataset[feature_names].values),
-                                color='green')
+                                color=reg_line_color)
                         ax.set_xlabel(feature_names[i])
                         ax.set_ylabel(feature_names[j])
                         ax.legend(['Linear Regression', 'Normal', 'Outlier'])

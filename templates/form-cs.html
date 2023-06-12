@@ -5,115 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            overflow-x: hidden;
-        }
-
-        #video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        #video-background video {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .dataset-table {
-            margin-top: 50px;
-        }
-
-        .dataset-table table {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 5px;
-        }
-
-        .dataset-table th {
-            background-color: #f8f9fa;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .dataset-table td {
-            color: #555;
-            vertical-align: middle;
-        }
-
-        .dataset-table td input[type="radio"] {
-            margin: 0;
-        }
-
-        .dataset-table td input[type="radio"]:checked::after {
-            background-color: darkred;
-        }
-
-        .dataset-table td label {
-            margin-bottom: 0;
-        }
-
-        .clustering-section {
-            margin-top: 50px;
-        }
-
-        .clustering-section .form-group {
-            margin-bottom: 15px;
-        }
-
-        .text-box {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            font-weight: bold;
-        }
-
-        @media (max-width: 767px) {
-            .container {
-                margin-top: 150px;
+        <style>
+        @media (max-width: 767.98px) {
+            .dataset-table {
+                margin-bottom: 20px;
             }
         }
-.box {
-    background-color: rgba(150, 153, 220, 0.8);
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.transparent-bg {
-  background-color: rgba(255, 255, 255, 0.5); /* Adjust the last value (0.2) for the desired transparency (0 to 1) */
-}
-
-.transparent-bg .navbar-collapse {
-  background-color: rgba(255, 255, 255, 0.8); /* Adjust the last value (0.2) for the desired transparency (0 to 1) */
-}
-
-
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 </head>
+
 <body>
-    <div id="video-background">
-        <video autoplay muted loop>
-            <source src="static/space.mp4" type="video/mp4">
-        </video>
-    </div>
+
 
 <nav class="navbar navbar-expand-lg navbar-light transparent-bg">
   <a class="navbar-brand" href="/start">Home</a>
@@ -143,60 +47,66 @@
 
 
 
-    <div class="container">
-        <!-- Wifi tunnel section -->
+
+    <div class="container mt-5">
         <div class="row mb-5">
             <div class="col-md-4">
                 <a href="{{ url_for('readme') }}" class="btn btn-primary">Readme.md</a>
             </div>
         </div>
         <form method="POST" action="{{ url_for('generate_linear_plots') }}" enctype="multipart/form-data">
-        <!-- Dataset selection section -->
-        <div class="row mb-5">
-            <div class="col-md-4 dataset-table">
-                <div class="box"><h4>Select a Dataset:</h4></div>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Dataset Name</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Existing dataset options -->
-                        <tr>
-                            <td><input type="radio" name="dataset" value="custom" id="custom"></td>
-                            <td><div class="text-box">Custom Dataset:</div></td>
-                        </tr>
-                        <!-- Custom dataset file input -->
-                        <tr id="custom-dataset-row" style="display: none;">
-                            <td><label for="custom-dataset">Upload Dataset File:</label></td>
-                            <td><input type="file" name="custom_dataset" id="custom-dataset"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="dataset" value="dataset1" id="dataset1"></td>
-                            <td><div class="text-box">data.csv</div> Contains information about sales transactions such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="dataset" value="dataset2" id="dataset2"></td>
-                            <td><div class="text-box">fundamentals.csv</div> Contains personal information such as first name, last name, title, gender, email, address, job details, and IP address.</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="dataset" value="dataset3" id="dataset3"></td>
-                            <td><div class="text-box">kc_house_data.csv</div> Contains demographic information about customers such as age, education, income, occupation, and settlement size.</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="dataset" value="dataset4" id="dataset4"></td>
-                            <td><div class="text-box">Nutrition__Physical_Activity__and_Obesity_-_Behavioral_Risk_Factor_Surveillance_System.csv</div> Contains chemical composition and sensory data for wines, with a customer segmentation variable.</td>
-                        </tr>
-                        <tr>
+            <div class="row mb-5">
+                <div class="col-md-4 dataset-table">
+                    <div class="box">
+                        <h4>Select a Dataset:</h4>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Dataset Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Existing dataset options -->
+                            <tr>
+                                <td>
+                                    <input type="radio" name="dataset" value="custom" id="custom">
+                                </td>
+                                <td>
+                                    <div class="text-box">Custom Dataset:</div>
+                                </td>
+                            </tr>
+                            <!-- Custom dataset file input -->
+                            <tr id="custom-dataset-row" style="display: none;">
+                                <td>
+                                    <label for="custom-dataset">Upload Dataset File:</label>
+                                </td>
+                                <td>
+                                    <input type="file" name="custom_dataset" id="custom-dataset">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="dataset" value="dataset1" id="dataset1" checked>
+                                </td>
+                                <td>
+                                    <div class="text-box">data.csv</div>
+                                    Contains information about sales transactions such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="dataset" value="dataset4" id="dataset4">
+                                </td>
+                                <td>
+                                    <div class="text-box">Nutrition__Physical_Activity__and_Obesity_-_Behavioral_Risk_Factor_Surveillance_System.csv</div>
+                                    Contains chemical composition and sensory data for wines, with a customer segmentation variable.
+                                </td>
+                            </tr>
+                                                    <tr>
                             <td><input type="radio" name="dataset" value="dataset5" id="dataset5"></td>
                             <td><div class="text-box">placement.csv</div> Contains chemical composition and sensory data for wines, with a customer segmentation variable.</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="dataset" value="dataset6" id="dataset6" style="display:none"></td>
-                            <td><div class="text-box">population.csv</div> Contains information about online retail transactions such as invoice number, product code, description, quantity, price, and country.</td>
                         </tr>
                         <tr>
                             <td><input type="radio" name="dataset" value="dataset7" id="dataset7"></td>
@@ -219,67 +129,70 @@
                             <td><div class="text-box">Salary_Data.csv</div> Contains information about items purchased together in a transaction, used for market basket analysis.</td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="dataset" value="dataset12" id="dataset12"></td>
-                            <td><div class="text-box">securities.csv</div> Contains information about product sales such as product ID, weight, fat content, product visibility, type, MRP, and sales outlet.</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="dataset" value="dataset13" id="dataset13"></td>
-                            <td><div class="text-box">who_dataset.csv</div> Contains information about sports performance such as name, age, gender, device used, network type, and sports played.</td>
-                        </tr>
-                        <tr>
                             <td><input type="radio" name="dataset" value="dataset14" id="dataset14"></td>
                             <td><div class="text-box">winequality-red.csv</div> Contains demographic and behavioral data about customers, used for segmentation and targeting.</td>
                         </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-            <!-- Clustering section -->
-            <div class="col-md-4 clustering-section">
-                <div class="form-group">
-                    <div class="box"><label for="algoSelect">Select Algorithm:</label></div>
-
-                    <select class="form-control" id="algoSelect" name="algo_type">
-                        <option value="linear_regression">linear-regression</option>
-                    </select>
+                        </tbody>
+                    </table>
                 </div>
-                <button type="submit" class="btn btn-primary">Generate</button>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="bgColor">Background Color:</label>
+                        <input type="color" id="bgColor" name="bg_color" value="#000000">
+                    </div>
+                    <div class="form-group">
+                        <label for="regLineColor">Regression Line Color:</label>
+                        <input type="color" id="regLineColor" name="reg_line_color" value="#00ff00">
+                    </div>
+                    <div class="form-group">
+                        <label for="outlierColor">Outlier Color:</label>
+                        <input type="color" id="outlierColor" name="outlier_color" value="#ff0000">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="box">
+                            <label for="algoSelect">Select Algorithm:</label>
+                        </div>
+                        <select class="form-control" id="algoSelect" name="algo_type">
+                            <option value="linear_regression" selected>linear-regression</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Generate</button>
+                </div>
             </div>
-        </div>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('input[name="dataset"]').change(function() {
-            if ($(this).val() === 'custom') {
-                $('#custom-dataset-row').show();
-            } else {
-                $('#custom-dataset-row').hide();
-            }
-        });
-
-        $('form').submit(function(e) {
-            var dataset = $('input[name="dataset"]:checked').val();
-            if (dataset === 'custom') {
-                var fileInput = $('#custom-dataset')[0];
-                var file = fileInput.files[0];
-                if (file) {
-                    // Submit the form without AJAX
-                    return true;
+    <script>
+        $(document).ready(function() {
+            $('input[name="dataset"]').change(function() {
+                if ($(this).val() === 'custom') {
+                    $('#custom-dataset-row').show();
                 } else {
-                    alert('Please select a file or upload one to continue.');
+                    $('#custom-dataset-row').hide();
+                }
+            });
+
+            $('form').submit(function(e) {
+                var dataset = $('input[name="dataset"]:checked').val();
+                if (dataset === 'custom') {
+                    var fileInput = $('#custom-dataset')[0];
+                    var file = fileInput.files[0];
+                    if (file) {
+                        // Submit the form without AJAX
+                        return true;
+                    } else {
+                        alert('Please select a file or upload one to continue.');
+                        e.preventDefault();  // Prevent form submission
+                    }
+                } else if (!dataset) {
+                    alert('Please select a dataset to continue.');
                     e.preventDefault();  // Prevent form submission
                 }
-            } else if (!dataset) {
-                alert('Please select a dataset to continue.');
-                e.preventDefault();  // Prevent form submission
-            }
+            });
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
