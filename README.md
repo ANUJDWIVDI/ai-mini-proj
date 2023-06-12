@@ -1,28 +1,27 @@
-# 📊 Market Segmentation Flask Web Architecture
+# Linear Regression and Outlier Detection
 
-A web application built using Flask for market segmentation using unsupervised machine learning algorithms. The application allows users to upload a dataset, select relevant features, and apply clustering algorithms to group similar customers based on their purchasing behavior.
-By: [@anuj_dwivedi](https://linktr.ee/anuj_dwivedi)
+📊 A web application that implements linear regression and outlier detection techniques on various datasets. It provides a user-friendly interface for selecting datasets, customizing regression parameters, and generating scatter plots with regression lines. The application also highlights any detected outliers in the plots.
 
-## 🚀 Getting Started
+## Features
 
-### 🛠️ Prerequisites
+🔍 Perform linear regression on multiple datasets  
+📈 Detect and visualize outliers in the scatter plots  
+🎨 Customize plot colors for background, regression line, and outliers  
+📄 Generate a downloadable PDF report summarizing the analysis  
 
-- Python 3.x
-- Flask
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
+## Technologies Used
 
-### 🏃‍♀️ Running the Application
+🐍 Python  
+🌐 Flask (web framework)  
+📊 Matplotlib (plotting library)  
+📊 Pandas (data manipulation library)  
+🤖 Scikit-learn (machine learning library)  
+📄 ReportLab (PDF generation library)  
 
-1. Clone this repository
-2. Install the prerequisites mentioned above
-3. Open a terminal and navigate to the root directory of the project
-4. Run the following command to start the Flask application:
-python app.py
+## Installation
 
-5. Open a web browser and go to `http://localhost:5000`
+1. Clone the GitHub repository:
+git clone https://github.com/ANUJDWIVDI/ai-mini-proj
 
 ### 💻 Architecture
 
@@ -30,7 +29,7 @@ The web application is built using Flask, a Python web framework. The user inter
 
 ### 📈 Algorithm
 
-The web application implements K-means clustering algorithm to segment the customers based on their purchasing behavior. The number of clusters can be selected by the user. The results are displayed in a scatter plot, which can be downloaded as a PNG file.
+The web application implements Linear Regression adn the plots and its colors can be selected by the user . The results are displayed in a scatter plot, which can be downloaded as a PNG file.
 
 ### 🌟 Features
 
@@ -52,4 +51,3 @@ The user interface is designed using Bootstrap and custom CSS. The application u
 [LinkTree](https://linktr.ee/anuj_dwivedi)
 [LinkedIn](https://www.linkedin.com/in/anuj-dwivedi-1352831b1/)
 [Instagram](https://www.instagram.com/anuj_dwvd_0/)
-
