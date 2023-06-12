@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Market Segmentation Flask Web Architecture</title>
+	<title>Linear Regression and Outlier Detection</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style>
 		.navbar {
@@ -24,81 +24,92 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light transparent-bg">
-  <a class="navbar-brand" href="/start">Home</a>
+  <a class="navbar-brand" href="#">Linear Regression and Outlier Detection</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/about">About</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#features">Features</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="https://drive.google.com/file/d/1t6D7JVVLlZOR1MaAi_x10y44sqqtBDnd/view?usp=sharing">Report</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#technologies">Technologies Used</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/team">Team Details</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#installation">Installation</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ url_for('readme') }}">Readme.md</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#architecture">Architecture</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="https://projectai.me">Contact Dev</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#algorithm">Algorithm</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#ui-ux">UI/UX</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contributors">Contributors</a>
       </li>
     </ul>
   </div>
 </nav>
 
+<section class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Linear Regression and Outlier Detection</h1>
+      <p>A web application that implements linear regression and outlier detection techniques on various datasets. It provides a user-friendly interface for selecting datasets, customizing regression parameters, and generating scatter plots with regression lines. The application also highlights any detected outliers in the plots.</p>
 
-	<section class="container">
-		<div class="row">
-			<div class="col-md-8">
-                <br>
-                <br>
-                <br>
-                <br>
-				<h1>Market Segmentation Flask Web Architecture</h1>
-				<p>A web application built using Flask for market segmentation using unsupervised machine learning algorithms. The application allows users to upload a dataset, select relevant features, and apply clustering algorithms to group similar customers based on their purchasing behavior.</p>
-				<p>By: <a href="https://linktr.ee/anuj_dwivedi">@anuj_dwivedi</a></p>
-				<p>WEBAPP ---- >  <a href="/index" class="btn btn-primary">Link .🌐</a></p>
-				<div id="about" class="mt-5">
-					<h2>About</h2>
-					<h3>Prerequisites</h3>
-					<ul>
-						<li>Python 3.x</li>
-						<li>Flask</li>
-						<li>Pandas</li>
-						<li>NumPy</li>
-						<li>Scikit-learn</li>
-						<li>Matplotlib</li>
-					</ul>
-					<h3>Running the Application</h3>
-					<ol>
-						<li>Clone this repository</li>
-						<li>Install the prerequisites mentioned above</li>
-						<li>Open a terminal and navigate to the root directory of the project</li>
-						<li>Run the following command to start the Flask application: <code>python app.py</code></li>
-						<li>Open a web browser and go to <code>http://localhost:5000</code></li>
-					</ol>
-					<h3>Architecture</h3>
-					<p>The web application is built using Flask, a Python web framework. The user interface is designed using HTML/CSS/JavaScript and the server-side scripts are written in Python. The data processing is done using Pandas, and the machine learning algorithms are implemented using scikit-learn. The application uses unsupervised learning algorithms such as KMeans and DBSCAN for clustering the customers based on their purchasing behavior. The user can upload their own dataset, select relevant features, and apply different clustering algorithms to segment their customers.</p>
-				</div>
-				<div id="contributors" class="mt-5">
-					<h2>Contributors</h2>
-					<ul>
-						<li><a href="https://linktr.ee/anuj_dwivedi">Anuj Dwivedi</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<img src="static/assets-img/3d-fluency-python.png" class="img-fluid">
-			</div>
-		</div>
-	</section>
-	<footer class="bg-light mt-5 py-3">
-	</footer>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <h2 id="features">Features</h2>
+      <ul>
+        <li>Perform linear regression on multiple datasets</li>
+        <li>Detect and visualize outliers in the scatter plots</li>
+        <li>Customize plot colors for background, regression line, and outliers</li>
+        <li>Generate a downloadable PDF report summarizing the analysis</li>
+      </ul>
+
+      <h2 id="technologies">Technologies Used</h2>
+      <ul>
+        <li>Python</li>
+        <li>Flask (web framework)</li>
+        <li>Matplotlib (plotting library)</li>
+        <li>Pandas (data manipulation library)</li>
+        <li>Scikit-learn (machine learning library)</li>
+        <li>ReportLab (PDF generation library)</li>
+      </ul>
+
+      <h2 id="installation">Installation</h2>
+      <ol>
+        <li>Clone the GitHub repository:<br>
+          <code>git clone https://github.com/ANUJDWIVDI/ai-mini-proj</code></li>
+      </ol>
+
+      <h2 id="architecture">Architecture</h2>
+      <p>The web application is built using Flask, a Python web framework. The user interface is designed using HTML/CSS/JavaScript, and the server-side scripts are written in Python. Data processing is done using Pandas, and the machine learning algorithms are implemented using scikit-learn.</p>
+
+      <h2 id="algorithm">Algorithm</h2>
+      <p>The web application implements linear regression and allows users to select the datasets and customize regression parameters. The results are displayed in a scatter plot, which can be downloaded as a PNG file.</p>
+
+      <h2 id="ui-ux">UI/UX</h2>
+      <p>The user interface is designed using Bootstrap and custom CSS. The application uses jQuery for dynamic content loading and AJAX requests.</p>
+
+      <h2 id="contributors">Contributors</h2>
+      <ul>
+        <li>Anuj Dwivedi (@ANUJDWIVDI)</li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <img src="static/assets-img/3d-fluency-python.png" class="img-fluid">
+    </div>
+  </div>
+</section>
+
+<footer class="bg-light mt-5 py-3">
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
