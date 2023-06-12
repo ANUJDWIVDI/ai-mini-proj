@@ -45,7 +45,16 @@ def index():
             shutil.rmtree(file_path)
     return render_template('form-cs.html')
 
-
+@app.route('/clear_plots')
+def clear_plots():
+    folder_path = 'static/plots'
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    return '', 204
 
 @app.route('/readme', methods=['GET', 'POST'])
 def readme():

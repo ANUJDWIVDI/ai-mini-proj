@@ -212,6 +212,14 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            // Page is loaded from the cache (back button clicked)
+            location.reload();
+        }
+    });
+</script>
     <script>
         $(document).ready(function() {
             $('input[name="dataset"]').change(function() {
