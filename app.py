@@ -1,7 +1,5 @@
 import os
 import shutil
-summary_for_pdf = []
-
 import matplotlib.pyplot as plt
 import pandas as pd
 from flask import Flask, render_template, request
@@ -9,9 +7,13 @@ from flask import send_file
 from reportlab.lib.pagesizes import portrait, A4
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import IsolationForest
+
+
+summary_for_pdf = []
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def start():
@@ -60,8 +62,7 @@ def allowed_file(filename):
 # Route for generating and displaying results
 
 
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import IsolationForest
+
 
 def get_plot_filenames():
     plot_dir = 'static/plots'
