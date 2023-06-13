@@ -170,16 +170,16 @@ body {
 			</div>
 		</nav>
 
-		<!-- Display the feature names -->
-		<div class="container my-5">
-			<h2>Feature Names:</h2>
-			<ul>
-				{% for name in feature_names %}
-				<li>{{ name }}</li>
-				{% endfor %}
-			</ul>
-		</div>
-
+<!-- Display the feature names -->
+<div class="container my-5">
+        <h2>Linear Regression:</h2>
+    <p>Linear regression shows the relationship between the dependent variable and the independent variable.</p>
+    <p><br></p>
+    <h2>Dependent Variable:</h2>
+    <p>{{ dependent_variable }}</p>
+    <h2>Independent Variable:</h2>
+    <p>{{ independent_variable }}</p>
+</div>
 	<!-- Display a single image -->
 <div class="container my-5">
     <h2>Regression Plot:</h2>

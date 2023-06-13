@@ -177,6 +177,10 @@ def generate_linear_plots():
             X = dataset.iloc[:, 0].values.reshape(-1, 1)  # First column as the independent variable
             y = dataset.iloc[:, 1].values.astype(float)  # Convert target variable to float
 
+            # Pass the dependent and independent variable names to the template
+            dependent_variable = dataset.columns[1]  # Assuming the dependent variable is the second column
+            independent_variable = dataset.columns[0]  # Assuming the independent variable is the first column
+
             if len(X) > 0 and len(y) > 0:  # Check if dataset has at least one sample
                 feature_names = dataset.columns.tolist()[:2]  # Select first two columns as default
 
@@ -238,7 +242,8 @@ def generate_linear_plots():
                 print(plot_summary)
 
                 # Return results HTML
-                return render_template('result.html',image_names=image_names, image_paths=image_paths, feature_names=feature_names,
+                return render_template('result.html', image_names=image_names, image_paths=image_paths,
+                                       dependent_variable=dependent_variable, independent_variable=independent_variable,
                                        table_html=table_html, plot_summary=plot_summary)
 
             else:
