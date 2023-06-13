@@ -175,10 +175,8 @@ body {
         <h2>Linear Regression:</h2>
     <p>Linear regression shows the relationship between the dependent variable and the independent variable.</p>
     <p><br></p>
-    <h2>Dependent Variable:</h2>
-    <p>{{ dependent_variable }}</p>
-    <h2>Independent Variable:</h2>
-    <p>{{ independent_variable }}</p>
+    <p>Dependent Variable: {{ dependent_variable }}</p>
+    <p>Independent Variable: {{ independent_variable }}</p>
 </div>
 	<!-- Display a single image -->
 <div class="container my-5">
@@ -192,6 +190,11 @@ body {
     </div>
 </div>
 
+        		<!-- Add the Download button -->
+		<div class="text-center mt-3">
+			<a class="btn btn-primary" href="/download-pdf" target="_blank" style="color: #ffffff; font-weight: bold;">Download PDF</a>
+		</div>
+	</div>
 
 <!-- Display the plot summaries -->
 <div class="container my-5">
@@ -203,11 +206,6 @@ body {
   {% endfor %}
 </div>
 
-        		<!-- Add the Download button -->
-		<div class="text-center mt-3">
-			<a class="btn btn-primary" href="/download-pdf" target="_blank" style="color: #ffffff; font-weight: bold;">Download PDF</a>
-		</div>
-	</div>
 
 	<div class="container my-5">
 		<h2>Dataset:</h2>
